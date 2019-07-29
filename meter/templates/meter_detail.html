@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <title>Meter Deteil</title>
+</head>
+<body>
+    <div class="container mt=5">
+        <div class="row">
+            <div class="col-6 offset-md-2">
+                <h2 class="mb-4 mt-3">{{ meter.meter_name }}</h2>
+
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>Resource: {{meter.get_resource_display}}</td>
+                                    <td>Unit: {{meter.unit}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last reading: {{ data_for_function|last|last }}</td>
+                                    <td>Last reading date: {{ date|date:"SHORT_DATE_FORMAT" }} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h2 class="mb-4 mt-3">Upload Readings</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <form method='post' enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <label></label>
+                            <input type="file" name="upload_file"/>
+
+                            <button type="submit" class="btn btn-success">Upload</button>
+                            <button type="submit" class="btn btn-light">Reset</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="container">
+                    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+                    <script>
+
+                        _data_for_function = {{ data_for_function|safe }}
+                        Highcharts.chart('container', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Meter Consumptions'
+                            },
+                            xAxis: {
+                                type: 'category',
+                                labels: {
+                                    rotation: -45,
+                                    style: {
+                                        fontSize: '13px',
+                                        fontFamily: 'Verdana, sans-serif'
+                                    }
+                                }
+                            },
+                            yAxis: {
+                                min: 0,
+                            },
+                            legend: {
+                                enabled: false
+                            },
+                            tooltip: {
+                                pointFormat: 'Relative readings (meter consumptions) <b>{point.y:.1f} </b>'
+                            },
+                            series: [{
+                                data: _data_for_function,
+                                dataLabels: {
+                                    enabled: true,
+                                    rotation: -90,
+                                    color: '#FFFFFF',
+                                    align: 'right',
+                                    format: '{point.y:.1f}', // one decimal
+                                    y: 10, // 10 pixels down from the top
+                                    style: {
+                                        fontSize: '13px',
+                                        fontFamily: 'Verdana, sans-serif'
+                                    }
+                                }
+                            }]
+                        });
+
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

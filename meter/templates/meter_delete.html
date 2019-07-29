@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container mt=5">
+        <div class="col align-self-center">
+            <h1 class="mb-5 mt-4">Delete meter:</h1>
+        </div>
+            <form action="{{ tag.get_delete_url }}" method="post" >
+                {% csrf_token %}
+
+                <h3>Are you sure you want to delete <b>{{ meter.meter_name|title }}</b> ?</h3>
+                <a href="{% url 'meter_detail' slug=meter.slug %}">Cancel</a>
+                <button type="submit" name="button" class="btn btn-danger" >Delete</button>
+            </form>
+    </div>
+
+</body>
+</html>

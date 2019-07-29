@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Create Meter</title>
+</head>
+<body>
+    <div class="container mt=5">
+        <div class="row">
+            <div class="col-6 offset-md-2">
+                <h1 class="mb-5 mt-4">Create meter</h1>
+                <form action="{% url 'create_meter' %}" method='post'>
+                    {% csrf_token %}
+                    {% for field in form %}
+
+                        <div class="form-group">
+                            {% if field.errors %}
+                                <div class="alert alert-danger">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+
+                            {{ field.label }}
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <a href="{% url 'list_meters' %}"><button type="submit" class="btn btn-light">Cancel</button></a>
+                    <button type="submit" class="btn btn-success">Create meter</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
