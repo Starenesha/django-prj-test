@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    <title>Meter Deteil</title>
-</head>
-<body>
-    <div class="container mt=5">
-        <div class="row">
-            <div class="col-6 offset-md-2">
+{% extends 'list_meters.html' %}
+
+{% block title %}
+    {{meter.title}} - {{meter.super}}
+{% endblock %}
+
+{% block content %}
                 <h2 class="mb-4 mt-3">{{ meter.meter_name }}</h2>
 
                 <div class="card">
@@ -43,7 +37,7 @@
                         </form>
                     </div>
                 </div>
-
+                <div>{{parsed_items}}</div>
                 <div id="container">
                     <script src="https://code.highcharts.com/highcharts.src.js"></script>
                     <script>
@@ -94,10 +88,4 @@
 
                     </script>
                 </div>
-
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
+{% endblock %}

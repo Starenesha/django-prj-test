@@ -4,43 +4,48 @@
     <meta charset="UTF-8">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>List meters</title>
+    <title>
+        {%block title%}
+        List meters
+        {%endblock%}
+    </title>
 </head>
 <body>
-    <div class="container mt=5">
-        <div class="col align-self-center">
-            <h1 class="mb-5 mt-4">Meters:</h1>
+    <div class="container mb-5 mt-4">
+        {% block content %}
+        <div class="container">
+            <h1 class="mb-3 mt-2">Meters:</h1>
         </div>
 
-            <div class="container-fluid">
-                <div class=".col-md-4 .offset-md-4">
+            <div class="container">
                     <a href="{% url 'create_meter' %}">
                         <button type="button" class="btn btn-success" >Create Meter</button>
                     </a>
-                </div>
             </div>
 
-            <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col"></th>
-                      <th scope="col">Resource</th>
-                      <th scope="col">Unit</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                    {% for meter in meters %}
-                    <tbody>
+            <div class="width: 75">
+                <table class="table table-bordered ">
+                      <thead>
                         <tr>
-                            <td><a href="{% url 'meter_detail' slug=meter.slug %}">{{ meter.meter_name|title}}</a></td>
-                            <td>{{meter.get_resource_display|title}}</td>
-                            <td>{{meter.unit|title}}</td>
-                            <td><a href="{% url 'meter_delete' slug=meter.slug %}" class="active"><button type="button" class="btn btn-light">Delete</button></a></td>
+                          <th scope="col"></th>
+                          <th scope="col">Resource</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col"></th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-            </table>
-
+                      </thead>
+                        {% for meter in meters %}
+                        <tbody>
+                            <tr>
+                                <td><a href="{% url 'meter_detail' slug=meter.slug %}">{{ meter.meter_name|title}}</a></td>
+                                <td>{{meter.get_resource_display|title}}</td>
+                                <td>{{meter.unit|title}}</td>
+                                <td><a href="{% url 'meter_delete' slug=meter.slug %}" class="active"><button type="button" class="btn btn-light">Delete</button></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                </table>
+            </div>
+        {% endblock %}
 
     </div>
 
