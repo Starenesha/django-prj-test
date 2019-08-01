@@ -16,7 +16,7 @@
                                     <td>Unit: {{meter.unit}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Last reading: {{ data_for_function|last|last }}</td>
+                                    <td>Last reading: {{ result|last|last }}</td>
                                     <td>Last reading date: {{ date|date:"SHORT_DATE_FORMAT" }} </td>
                                 </tr>
                             </tbody>
@@ -37,12 +37,12 @@
                         </form>
                     </div>
                 </div>
-                <div>{{parsed_items}}</div>
+                <div></div>
                 <div id="container">
                     <script src="https://code.highcharts.com/highcharts.src.js"></script>
                     <script>
 
-                        _data_for_function = {{ data_for_function|safe }}
+                        _result = {{ result|safe }}
                         Highcharts.chart('container', {
                             chart: {
                                 type: 'column'
@@ -70,7 +70,7 @@
                                 pointFormat: 'Relative readings (meter consumptions) <b>{point.y:.1f} </b>'
                             },
                             series: [{
-                                data: _data_for_function,
+                                data: _result,
                                 dataLabels: {
                                     enabled: true,
                                     rotation: -90,

@@ -3,7 +3,8 @@ from datetime import datetime
 from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
-
+import os
+from app.settings import MEDIA_ROOT
 
 # Create your models here.
 
@@ -11,6 +12,24 @@ from django.utils.text import slugify
 def gen_slug(s):
     new_slug = slugify(s,allow_unicode=True)
     return new_slug
+
+
+def path_upload_to(instance,filename):
+    return os.path.join(MEDIA_ROOT,'filename')
+
+
+class CSVUpload(models.Model):
+
+    file = models.FileField(upload_to=path_upload_to)
+    created_date = models.DateTimeField(default=datetime.now)
+
+    #  def save(self):
+
+def convert_header(csvHeader):
+    header_ = csvHeader[0]
+    cols = [x.replace('', '_').lower() for x in header_.split(",")]
+    return cols
+
 
 class Meter(models.Model):
     meter_name = models.CharField(max_length=50, db_index=True )
@@ -34,15 +53,6 @@ class Meter(models.Model):
 
 
 
-class CSVUpload(models.Model):
-
-    file = models.FileField(upload_to='uploads/%Y/%m/%d')
-    created_date = models.DateTimeField(default=datetime.now)
 
 
 
-
-def convert_header(csvHeader):
-    header_ = csvHeader[0]
-    cols = [x.replace('','_').lower() for x in header_.split(",")]
-    return cols

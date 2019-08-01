@@ -1,5 +1,7 @@
 
 
+
+
 def consuptions(a):
     copy = a[:]
 

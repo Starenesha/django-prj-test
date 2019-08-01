@@ -24,4 +24,5 @@ class MeterForm(forms.ModelForm):
 
 
 class UploadCsvForm(forms.Form):
+
     upload_file = forms.FileField()
