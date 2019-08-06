@@ -1,17 +1,17 @@
-#records = CSVUpload.objects.filter(name_place=slug_)  # [{},{}]
+
 
 def consumption(records):
     records_ =records[:]
 
-    tmp_value = []  # list all values
+    tmp_value = []
     for x in records:
         tmp = x.value
         tmp_value.append(tmp)
         records = x
 
-    tmp_date = []  # list of all date
+    tmp_date = []
 
-    #records_ = CSVUpload.objects.filter(name_place=slug_)  # [{},{}]
+
     for x in records_:
         tmp = x.date.isoformat()
         tmp_date.append(tmp)
