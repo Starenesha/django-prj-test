@@ -1,30 +1,25 @@
+#records = CSVUpload.objects.filter(name_place=slug_)  # [{},{}]
 
+def consumption(records):
+    records_ =records[:]
 
+    tmp_value = []  # list all values
+    for x in records:
+        tmp = x.value
+        tmp_value.append(tmp)
+        records = x
 
+    tmp_date = []  # list of all date
 
-def consuptions(a):
-    copy = a[:]
+    #records_ = CSVUpload.objects.filter(name_place=slug_)  # [{},{}]
+    for x in records_:
+        tmp = x.date.isoformat()
+        tmp_date.append(tmp)
+        records_ = x
 
-    a_ = a[:]
-    date = []
-    value = []
+    tmp_date_ = tmp_date[1:]
 
-
-    for dict in a_:
-        temp = dict['_d_a_t_e_']
-        date.append(temp)
-        a_ = dict
-
-    for dict in copy:
-        temp=dict['_v_a_l_u_e_']
-        value.append(temp)
-        copy = dict
-
-    value_ = list(map(float,value))
-
-    diff = [value_[n-1] - value_[n] for n in range(1, len(value_))]
-    date_ = date[1:]
-
-    result_lst = list(zip(date, date_, diff))
-
+    lst_consumption = []
+    diff = [tmp_value[n - 1] - tmp_value[n] for n in range(1, len(tmp_value))]
+    result_lst = list(zip(tmp_date, tmp_date_, diff))
     return result_lst

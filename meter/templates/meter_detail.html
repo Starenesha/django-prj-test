@@ -33,8 +33,13 @@
                             <input type="file" name="upload_file"/>
 
                             <button type="submit" class="btn btn-success">Upload</button>
+                        </form>
+                        <form action="{% url 'meter_delete_data' slug=meter.slug %}" method="post"
+                                  enctype="multipart/form-data">
+                            {% csrf_token %}
                             <button type="submit" class="btn btn-light">Reset</button>
                         </form>
+
                     </div>
                 </div>
                 <div></div>
@@ -42,7 +47,7 @@
                     <script src="https://code.highcharts.com/highcharts.src.js"></script>
                     <script>
 
-                        _result = {{ result|safe }}
+                        result_ = {{ result_lst|safe }}
                         Highcharts.chart('container', {
                             chart: {
                                 type: 'column'
@@ -70,7 +75,7 @@
                                 pointFormat: 'Relative readings (meter consumptions) <b>{point.y:.1f} </b>'
                             },
                             series: [{
-                                data: _result,
+                                data: result_,
                                 dataLabels: {
                                     enabled: true,
                                     rotation: -90,

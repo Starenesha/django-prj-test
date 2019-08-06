@@ -23,5 +23,6 @@ urlpatterns = [
     path('create/', CreateMeter.as_view(), name='create_meter'),
     path('<str:slug>/',MeterDetail.as_view(), name='meter_detail'),
     path('<str:slug>/delete/',MeterDelete.as_view(),name='meter_delete'),
+    path('<str:slug>/delete-data/',meter_delete_data, name='meter_delete_data'),
 
 ]
