@@ -1,3 +1,3 @@
 # django-prj-test
 
-Demo: https://meterr.herokuapp.com/
+Demo: https://django-meter.herokuapp.com/
