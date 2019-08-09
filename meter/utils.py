@@ -1,25 +1,20 @@
-
-
 def consumption(records):
-    records_ =records[:]
+    '''Function which  create  list of tuples with consumption and date - for chart'''
 
-    tmp_value = []
+    records_ =records[:]
+    value_list = [] # list with value
+    date_list = [] # list with date
+
     for x in records:
         tmp = x.value
-        tmp_value.append(tmp)
+        value_list.append(tmp)
         records = x
-
-    tmp_date = []
-
 
     for x in records_:
         tmp = x.date.isoformat()
-        tmp_date.append(tmp)
+        date_list.append(tmp)
         records_ = x
 
-    tmp_date_ = tmp_date[1:]
-
-    lst_consumption = []
-    diff = [tmp_value[n - 1] - tmp_value[n] for n in range(1, len(tmp_value))]
-    result_lst = list(zip(tmp_date, tmp_date_, diff))
+    diff = [value_list[n - 1] - value_list[n] for n in range(1, len(value_list))] #Performing of calculation consumptions
+    result_lst = list(zip(date_list, date_list[1:], diff))  # create list of tuples with consumption and date
     return result_lst
