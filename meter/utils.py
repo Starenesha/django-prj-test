@@ -1,7 +1,7 @@
 def consumption(records):
     '''Function which  create  list of tuples with consumption and date - for chart'''
 
-    records_ =records[:]
+#    records_ =records[:]
     value_list = [] # list with value
     date_list = [] # list with date
     
